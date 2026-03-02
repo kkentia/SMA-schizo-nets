@@ -1,6 +1,9 @@
 # SMA-schizo-nets
 
-Ana Bog, @kkentia
-Yannick Künzli, #yannickkunz
-Yann Gourraud, @Dace23
-Mathilde Voyame, @matvoyame
+| Name | Github Handle |
+| --- | --- |
+| Ana Bog | @kkentia |
+| Yannick Künzli | @YannickKunz |
+| Yann Gourraud | @Dace23 |
+| Mathilde Voyame | @matvoyame |
+
