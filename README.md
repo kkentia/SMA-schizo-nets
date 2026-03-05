@@ -36,6 +36,6 @@ Visualization of the Breakdown: We will create colored and interactive 3D networ
 Ana Bog: analysis of the results & visualizations.  
 Yannick Künzli: core implementations (algorithms & validation metrics).  
 Yann Gourraud: core implementations (algorithms & validation metrics).  
-Mathile Voyame: data processing & result analysis.  
+Mathilde Voyame: data processing & result analysis.  
 
 Additionally, everyone will do their own litterature research. 
