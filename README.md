@@ -26,7 +26,12 @@ To quantitatively prove this structural breakdown of the Schizophrenia network, 
 *   **Visualization of the Breakdown and Simulation:** We will create colored and interactive 3D network graphs. The aim is to visually show how the nodes that normally form a neat community are scattered, explicitly highlight the "malicious bridges" in red, and chart the recovery trajectory of the Q-score after our simulation.
 
 ## Resources
-*   **Relevant study:** [Classifying schizophrenic and controls from fMRI data using graph theoretic framework and community detection](https://link.springer.com/article/10.1007/s13721-023-00415-4) *(Note: our project differentiates itself by focusing on topological simulation and specific sub-network breakdowns rather than binary Machine Learning classification).*
+*   **Relevant studies:**
+    - [Classifying schizophrenic and controls from fMRI data using graph theoretic framework and community detection](https://link.springer.com/article/10.1007/s13721-023-00415-4) *(Note: our project differentiates itself by focusing on topological simulation and specific sub-network breakdowns rather than binary Machine Learning classification).*
+    - [Nodal centrality of functional network in the differentiation of schizophrenia](https://pubmed.ncbi.nlm.nih.gov/26299706/)
+    - [Detecting schizophrenia at the level of the individual: relative diagnostic value of whole brain images, connectome-wide functional connectivity and graph-based metrics](https://pubmed.ncbi.nlm.nih.gov/31391132/)
+    - [Decreased small-world functional network connectivity and clustering across resting state networks in schizophrenia: an fMRI classification tutorial](https://pubmed.ncbi.nlm.nih.gov/24032010/)
+    - [Revealing multiple biological subtypes of schizophrenia through a data-driven approach](https://link.springer.com/article/10.1186/s12967-025-06503-5) *(Note: relevant from page 11 on DMN and SMN)*
 * [Preprocessed Dataset](https://data.mendeley.com/datasets/3h4mt7xryk/1)  
 * [Original Dataset](https://fcon_1000.projects.nitrc.org/indi/retro/cobre.html) 
 
