@@ -31,7 +31,10 @@ To quantitatively prove this structural breakdown of the Schizophrenia network, 
     - [Nodal centrality of functional network in the differentiation of schizophrenia](https://pubmed.ncbi.nlm.nih.gov/26299706/)
     - [Detecting schizophrenia at the level of the individual: relative diagnostic value of whole brain images, connectome-wide functional connectivity and graph-based metrics](https://pubmed.ncbi.nlm.nih.gov/31391132/)
     - [Decreased small-world functional network connectivity and clustering across resting state networks in schizophrenia: an fMRI classification tutorial](https://pubmed.ncbi.nlm.nih.gov/24032010/)
+    - [Hierarchical network disruptions in Schizophrenia: A multi-level fMRI study of functional connectivity](https://pubmed.ncbi.nlm.nih.gov/41110182/)
+    - [Restoring Synaptic Balance in Schizophrenia: Insights From a Thalamo-Cortical Conductance-Based Model](https://academic.oup.com/schizophreniabulletin/advance-article/doi/10.1093/schbul/sbaf149/8250824)
     - [Revealing multiple biological subtypes of schizophrenia through a data-driven approach](https://link.springer.com/article/10.1186/s12967-025-06503-5) *(Note: relevant from page 11 on DMN and SMN)*
+      
 * [Preprocessed Dataset](https://data.mendeley.com/datasets/3h4mt7xryk/1)  
 * [Original Dataset](https://fcon_1000.projects.nitrc.org/indi/retro/cobre.html) 
 
