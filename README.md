@@ -7,35 +7,42 @@
 | Yann Gourraud | @Dace23 |
 | Mathilde Voyame | @matvoyame |
 
-## Project Description
+# Project Description
 
 We are using network graph theory to understand the human brain, which can be treated as a complex and modular IT system. Using preprocessed fMRI time series data from the COBRE dataset, we aim to build weighted network graphs where each node represents a brain region and edges represent functional connectivity between the nodes.
 
-**Biological Problem**
+## Biological Problem
 
-In the normal human brain, these networks function like well-encapsulated microservices. For example, the "Executive Network" (focusing) and the "Default Mode Network" (daydreaming) function independently. However, in Schizophrenia, this network encapsulation breaks down. The boundaries between these networks get blurred, and they start to "cross-wire," causing the brain to misinterpret internal thoughts as external hallucinations.
+In the normal human brain, these networks function like well-encapsulated microservices. For example, the "Executive Network" (focusing) and the "Default Mode Network" (daydreaming) function independently. However, in Schizophrenia, this network encapsulation breaks down. The boundaries between these networks get blurred, and they start to "cross-wire," causing the brain to misinterpret internal thoughts as external hallucinations. 
 
-**Computational & Analytical Approach**
+## Computational & Analytical Approach
 
-To quantitatively prove this structural breakdown of the Schizophrenia network, our approach will be to:
+To quantitatively prove this structural breakdown of the Schizophrenia network, and to identify the specific topological causes, our approach will be to:
 
-Run Community Detection: Use the Leiden/Louvain algorithm to run community detection on our brain network graphs.  
-Measure Modularity (Q Score): Use this to calculate the Q Score of the network to understand how strictly separated these communities are.  
-We expect a statistically significant difference in the Q Score between Schizophrenic and Healthy networks.  
+*   **Run Community Detection:** Use the State-of-the-Art Leiden algorithm to run community detection on our brain network graphs.
+*   **Measure Modularity (Q Score):** Use this to calculate the Q Score of the network to understand how strictly separated these communities are. We expect a statistically significant lower Q Score in Schizophrenic networks compared to Healthy ones.
+*   **Identify "Malicious Bridges" (Network Exploration):** Instead of just looking at the global breakdown, we will calculate node-level metrics, specifically the **Participation Coefficient**, to pinpoint the exact brain regions (nodes) that are inappropriately communicating outside of their designated communities. These are the "leaky valves" causing the cross-wiring.
+*   **In Silico Network "Healing" (Targeted Simulation):** We will digitally delete these highly cross-wired "malicious bridge" nodes from the Schizophrenic networks and recalculate the Q-Score. Our aim is to test if the targeted removal of these faulty nodes mathematically restores the network's normal modular encapsulation.
+*   **Visualization of the Breakdown and Simulation:** We will create colored and interactive 3D network graphs. The aim is to visually show how the nodes that normally form a neat community are scattered, explicitly highlight the "malicious bridges" in red, and chart the recovery trajectory of the Q-score after our simulation.
 
-Analysis of Clinical Correlation (Severity): We will compare the network metrics we computed with the patients' phenotypic data. Our aim is to show that mathematically, the fragmentation of the network correlates with the severity of the patients' symptoms.
+## Resources
+*   **Relevant studies:**
+    - [Classifying schizophrenic and controls from fMRI data using graph theoretic framework and community detection](https://link.springer.com/article/10.1007/s13721-023-00415-4) *(Note: our project differentiates itself by focusing on topological simulation and specific sub-network breakdowns rather than binary Machine Learning classification).*
+    - [Nodal centrality of functional network in the differentiation of schizophrenia](https://pubmed.ncbi.nlm.nih.gov/26299706/)
+    - [Detecting schizophrenia at the level of the individual: relative diagnostic value of whole brain images, connectome-wide functional connectivity and graph-based metrics](https://pubmed.ncbi.nlm.nih.gov/31391132/)
+    - [Decreased small-world functional network connectivity and clustering across resting state networks in schizophrenia: an fMRI classification tutorial](https://pubmed.ncbi.nlm.nih.gov/24032010/)
+    - [Hierarchical network disruptions in Schizophrenia: A multi-level fMRI study of functional connectivity](https://pubmed.ncbi.nlm.nih.gov/41110182/)
+    - [Restoring Synaptic Balance in Schizophrenia: Insights From a Thalamo-Cortical Conductance-Based Model](https://academic.oup.com/schizophreniabulletin/advance-article/doi/10.1093/schbul/sbaf149/8250824)
+    - [Revealing multiple biological subtypes of schizophrenia through a data-driven approach](https://link.springer.com/article/10.1186/s12967-025-06503-5) *(Note: relevant from page 11 on DMN and SMN)*
+      
+* [Preprocessed Dataset](https://data.mendeley.com/datasets/3h4mt7xryk/1)  
+* [Original Dataset](https://fcon_1000.projects.nitrc.org/indi/retro/cobre.html) 
 
-Visualization of the Breakdown: We will create colored and interactive 3D network graphs. The aim is to visually show how the nodes that normally form a neat community in a normal network are scattered and bottlenecked in a Schizophrenic network.
+## Task Distribution
 
-[Relevant study](https://link.springer.com/article/10.1007/s13721-023-00415-4)  
-[Preprocessed Dataset](https://data.mendeley.com/datasets/3h4mt7xryk/1)  
-[Original Dataset](https://fcon_1000.projects.nitrc.org/indi/retro/cobre.html)  
+*   **Ana Bog:** Analysis of the results & visualizations (generating the 3D brain maps via `nilearn`, highlighting the bridge nodes, and creating the "healing" Q-score comparison charts).
+*   **Yannick Künzli:** Core implementations (calculating the Participation Coefficient, identifying the malicious bridges, and building the node deletion simulation loop).
+*   **Yann Gourraud:** Core implementations (running the baseline Leiden algorithm, calculating the initial Modularity Q-Scores, and performing statistical validations between groups).
+*   **Mathilde Voyame:** Data processing & result analysis (ingesting the `.nii.gz` files, applying the brain atlas to extract the network matrices, and researching the biological function of our identified nodes). 
 
-## Task distribution
-
-Ana Bog: analysis of the results & visualizations.  
-Yannick Künzli: core implementations (algorithms & validation metrics).  
-Yann Gourraud: core implementations (algorithms & validation metrics).  
-Mathile Voyame: data processing & result analysis.  
-
-Additionally, everyone will do their own litterature research. 
+*Additionally, everyone will do their own literature research to support their specific tasks.*
