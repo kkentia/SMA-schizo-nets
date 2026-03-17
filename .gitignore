@@ -1,0 +1,150 @@
+# ======================
+# Datasets & Data
+# ======================
+data/
+1160600/
+1160600.zip
+3h4mt7xryk-1/
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.csv
+*.parquet
+nilearn_cache/
+
+# ======================
+# macOS
+# ======================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ======================
+# Windows
+# ======================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# ======================
+# Linux
+# ======================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ======================
+# Editors & IDEs
+# ======================
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains (IntelliJ, PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+out/
+.idea_modules/
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# ======================
+# Logs & Temp Files
+# ======================
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.pid
+*.seed
+*.pid.lock
+
+# ======================
+# Build Outputs
+# ======================
+build/
+dist/
+out/
+target/
+bin/
+obj/
+
+# ======================
+# Dependency Directories
+# ======================
+node_modules/
+vendor/
+.pnp
+.pnp.js
+
+# ======================
+# Python Virtual Environments
+# ======================
+venv/
+.venv/
+env/
+.env/
+ENV/
+venv.bak/
+
+# ======================
+# Environment & Secrets
+# ======================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.*
