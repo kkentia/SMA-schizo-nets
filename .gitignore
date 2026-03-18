@@ -148,3 +148,4 @@ venv.bak/
 *.pem
 *.key
 secrets.*
+cobre_connectomes_database.h5
