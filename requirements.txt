@@ -1,0 +1,8 @@
+nibabel
+nilearn
+matplotlib
+numpy
+h5py
+ipywidgets
+scikit-learn
+tqdm
