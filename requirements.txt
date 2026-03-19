@@ -6,3 +6,6 @@ h5py
 ipywidgets
 scikit-learn
 tqdm
+pandas
+networkx
+plotly
