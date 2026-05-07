@@ -149,3 +149,6 @@ venv.bak/
 *.key
 secrets.*
 cobre_connectomes_database.h5
+
+# Miscellaneous
+__pycache__/
