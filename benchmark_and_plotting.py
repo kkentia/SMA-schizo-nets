@@ -53,10 +53,12 @@ def evaluate_single_run(matrix, algo_name, max_iter, k_std = 1.0):
     
     # Execution and timing of the tested algorithm
     start_time = time.perf_counter()
-    if algo_name == "Louvain":
-        partition = louvain_algorithm(graph=G, max_levels=max_iter)
-    elif algo_name == "Leiden":
+    if algo_name.lower() == "louvain":
+        partition = louvain_algorithm(G, max_levels=max_iter)
+    elif algo_name.lower() == "leiden":
         partition = leiden_algorithm(G, max_iterations=max_iter)
+    else: 
+        raise ValueError(f"Unknown algorithm name: {algo_name}")
     runtime = time.perf_counter() - start_time
 
     # Calculation of metrics
@@ -98,13 +100,23 @@ def run_benchmark_parallel(file_path, use_group_average=False, num_subjects=5, k
                     for matrix in matrices_to_test:
                         tasks.append((matrix, algo, iters, k_std))
 
+            """ for parralel processing, use that instead. 
             print(f" -> Parallel computing on the cluster for {ds_name}...")
-            with ProcessPoolExecutor() as executor:
+            with ProcessPoolExecutor(max_workers=2) as executor:
                 futures = [executor.submit(evaluate_single_run, *task) for task in tasks]
                 for fut in futures:
                     res = fut.result()
                     res["dataset"] = ds_name
                     all_results.append(res)
+                    
+            """
+
+            print(f" -> Sequential computing (Safe Mode) for {ds_name}...")
+            for task in tasks:
+                # task contient : (matrix, algo, iters, k_std)
+                res = evaluate_single_run(*task)
+                res["dataset"] = ds_name
+                all_results.append(res)
 
     df_res = pd.DataFrame(all_results)
     df_res.to_csv("benchmark_results_complete.csv", index=False)
@@ -127,8 +139,8 @@ def generate_plots(df):
 
     for ds in datasets:
         df_ds = df[df["dataset"] == ds]
-        df_louvain = df_ds[df_ds["algo"] == "Louvain"].sort_values("iterations")
-        df_leiden = df_ds[df_ds["algo"] == "Leiden"].sort_values("iterations")
+        df_louvain = df_ds[df_ds["algo"] == "louvain"].sort_values("iterations")
+        df_leiden = df_ds[df_ds["algo"] == "leiden"].sort_values("iterations")
 
         # ─── FIGURE A: QUALITY (Q-SCORE) VS RUNTIME ─────────────────────────
         fig, axes = plt.subplots(1, 2, figsize=(15, 5.5), sharex=True)
@@ -137,7 +149,7 @@ def generate_plots(df):
         # Louvain (Left)
         axes[0].set_xlabel("Number of Iterations", fontweight='bold')
         axes[0].set_ylabel("Quality (Q-Score Modularity)", color=color_q, fontweight='bold')
-        l1 = axes[0].plot(df_louvain["iterations"], df_louvain["modularity"], color=color_q, marker='"o', linewidth=2.5 ,label='Quality(Q)')
+        l1 = axes[0].plot(df_louvain["iterations"], df_louvain["modularity"], color=color_q, marker='o', linewidth=2.5 ,label='Quality(Q)')
         axes[0].tick_params(axis='y', labelcolor=color_q)
         axes[0].grid(True, linestyle='--', alpha=0.5)
 
@@ -209,6 +221,8 @@ def generate_plots(df):
 
 if __name__ == "__main__":
     file_path = "./SMA_data_processing/cobre_combined_connectomes_database.h5"
+
+    datasets = ["hc_pearson", "scz_pearson", "hc_glasso", "scz_glasso"]
 
     # RUN CHECK:
     # If the server freezes or takes too long with the individual analysis, 
