@@ -10,7 +10,7 @@
 | Mathilde Voyame | @matvoyame |
 
 ---
-
+See the [full project report](SMA_Project_Report.pdf) for details.
 ## Table of Contents
 
 - [Project Description](#project-description)
