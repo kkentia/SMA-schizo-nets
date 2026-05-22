@@ -9,7 +9,7 @@ import networkx as nx
 import numpy as np
 from collections import defaultdict
 
-file_path = "./SMA_data_processing/cobre_combined_connectomes_database.h5"
+file_path = "../SMA_data_processing/cobre_combined_connectomes_database.h5"
 
 graphs_hc_p = []
 graphs_scz_p = []

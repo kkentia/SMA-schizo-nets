@@ -11,4 +11,5 @@ networkx
 plotly
 jupyter
 seaborn
-scipy
+leidenalg
+python-igraph

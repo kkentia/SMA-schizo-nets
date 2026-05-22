@@ -10,10 +10,16 @@ import pandas as pd
 from sklearn.metrics import normalized_mutual_info_score
 from concurrent.futures import ProcessPoolExecutor
 
+<<<<<<< HEAD:benchmark_and_plotting.py
 # Ensure the current script directory is on sys.path for worker subprocesses importing
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # Assuming these are accessible locally:
 # from Leiden import leiden_algorithm, louvain_algorithm, modularity_vectorized
+=======
+# Ensure the parent directory is on sys.path for worker subprocesses importing
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from src.Leiden import leiden_algorithm, louvain_algorithm, modularity_vectorized
+>>>>>>> 6f2e638fe21508df802c24e60aba4d340072e709:benchmarks/benchmark_and_plotting.py
 
 
 def compute_threshold_and_filter(matrix, k_std=1.0):
@@ -165,6 +171,7 @@ def run_benchmark_parallel(file_path, valid_roi_mask, use_group_average=False, n
             tasks = []
             for algo in ["louvain", "leiden"]:
                 for iters in iterations_list:
+<<<<<<< HEAD:benchmark_and_plotting.py
                     for t_matrix in thresholded_matrices:
                         tasks.append((t_matrix, algo, iters))
 
@@ -173,6 +180,19 @@ def run_benchmark_parallel(file_path, valid_roi_mask, use_group_average=False, n
                 res = evaluate_single_run(*task)
                 res["dataset"] = ds_name
                 all_results.append(res)
+=======
+                    for matrix in matrices_to_test:
+                        tasks.append((matrix, algo, iters, k_std))
+
+            num_workers = min(os.cpu_count() or 4, 6)  # use up to 6 cores, leave headroom
+            print(f" -> Parallel computing ({num_workers} workers) for {ds_name}...")
+            with ProcessPoolExecutor(max_workers=num_workers) as executor:
+                futures = [executor.submit(evaluate_single_run, *task) for task in tasks]
+                for fut in futures:
+                    res = fut.result()
+                    res["dataset"] = ds_name
+                    all_results.append(res)
+>>>>>>> 6f2e638fe21508df802c24e60aba4d340072e709:benchmarks/benchmark_and_plotting.py
 
     df_res = pd.DataFrame(all_results)
     df_res.to_csv("benchmark_results_complete.csv", index=False)
@@ -235,7 +255,7 @@ def generate_plots(df):
 
 
 if __name__ == "__main__":
-    file_path = "./SMA_data_processing/cobre_combined_connectomes_database.h5"
+    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SMA_data_processing", "cobre_combined_connectomes_database.h5"))
 
     # 1. Fetch Atlas structures exactly like your friend
     atlas_schaefer = datasets.fetch_atlas_schaefer_2018(n_rois=1000, resolution_mm=2)
