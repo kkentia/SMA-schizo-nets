@@ -137,7 +137,7 @@ This project uses the **COBRE (Center of Biomedical Research Excellence)** fMRI 
 
 1. **Download** the pre-computed connectome database (~580 MB):
 
-   📥 [**Download `cobre_combined_connectomes_database.h5` from Google Drive**](https://drive.google.com/YOUR_LINK_HERE)
+   📥 [**Download `cobre_combined_connectomes_database.h5` from Google Drive**](https://drive.google.com/file/d/1fq6UmiMmVRzqMvcFz9ZWia2TtlZuUAtm/view?usp=sharing)
 
 2. Place it at:
 
