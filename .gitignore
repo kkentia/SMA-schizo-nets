@@ -9,7 +9,6 @@ data/
 *.npz
 *.h5
 *.hdf5
-*.csv
 *.parquet
 nilearn_cache/
 
