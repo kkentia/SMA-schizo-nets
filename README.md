@@ -246,6 +246,14 @@ For a quick comparison including NetworkX's library Louvain:
 python benchmarks/benchmark.py
 ```
 
+For the comprehensive validation benchmark (including Jaccard index, community overlap analysis, Pearson normalization, and the `leidenalg` C++ library):
+
+```bash
+python benchmarks/benchmark_enhanced.py
+```
+
+This generates `benchmark_enhanced_results.csv` and multiple comparison plots (`benchmark_overlay_*.png`, `benchmark_jaccard_*.png`, etc.).
+
 ### 3. Data Preprocessing (only needed if regenerating the database)
 
 ```bash
@@ -260,6 +268,7 @@ jupyter notebook SMA_data_processing/01_exploration_masquage.ipynb
 
 | File | Description |
 |---|---|
+| `benchmark_enhanced_results.csv` | Enhanced benchmark comparing Custom vs Library algorithms (Q, NMI, Jaccard, within/between ratio) |
 | `benchmark_results_complete.csv` | Full benchmark: 240 rows (algo × iterations × subjects × datasets) |
 | `benchmark_results.csv` | Early single-subject prototype results |
 
