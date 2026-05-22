@@ -65,7 +65,7 @@ def run_and_report(label, hc_graphs, scz_graphs, run_fn):
     print(f"  Avg SCZ Q-Score: {np.mean(scz_scores):.4f}")
     print(f"  P-value (Welch): {p_val:.4e}")
 
-def load_graphs(file_path, hc_key, scz_key, threshold=0.3):
+def load_graphs(file_path, hc_key, scz_key, threshold=0.3, apply_threshold=True):
     hc_graphs, scz_graphs = [], []
     with h5py.File(file_path, "r") as f:
         # Load HC
@@ -74,7 +74,8 @@ def load_graphs(file_path, hc_key, scz_key, threshold=0.3):
             np.fill_diagonal(A, 0)
             
             # Apply threshold (keeping strong positive AND negative correlations)
-            A[np.abs(A) < threshold] = 0.0
+            if apply_threshold:
+                A[np.abs(A) < threshold] = 0.0
             
             hc_graphs.append(nx.from_numpy_array(A))
             
@@ -84,7 +85,8 @@ def load_graphs(file_path, hc_key, scz_key, threshold=0.3):
             np.fill_diagonal(A, 0)
             
             # Apply threshold
-            A[np.abs(A) < threshold] = 0.0
+            if apply_threshold:
+                A[np.abs(A) < threshold] = 0.0
             
             scz_graphs.append(nx.from_numpy_array(A))
             
@@ -103,8 +105,8 @@ for connectivity, hc_key, scz_key in [
     ("Glasso",  "hc_glasso", "scz_glasso"),
 ]:
     print(f"\nLoading {connectivity} Data")
-    # graphs_hc, graphs_scz = load_graphs(file_path, hc_key, scz_key)
-    graphs_hc, graphs_scz = load_graphs(file_path, hc_key, scz_key, threshold=0.3)
+    apply_thresh = (connectivity != "Glasso")
+    graphs_hc, graphs_scz = load_graphs(file_path, hc_key, scz_key, threshold=0.3, apply_threshold=apply_thresh)
     print(f"HC {connectivity}: {len(graphs_hc)}  |  SCZ {connectivity}: {len(graphs_scz)}")
 
     print(f"\nBenchmarking {connectivity}")

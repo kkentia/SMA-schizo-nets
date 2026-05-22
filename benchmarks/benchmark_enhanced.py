@@ -224,15 +224,16 @@ def run_library_leiden(G):
 # MAIN BENCHMARK
 # ═══════════════════════════════════════════════════════════════════════
 
-def build_graph(matrix, k_std=1.0):
+def build_graph(matrix, k_std=1.0, apply_threshold=True):
     """Threshold and build graph from a connectivity matrix."""
     A = np.abs(matrix.copy())
     np.fill_diagonal(A, 0)
-    tri_upper = A[np.triu_indices_from(A, k=1)]
-    mu = np.mean(tri_upper)
-    sigma = np.std(tri_upper)
-    threshold = max(0.0, mu - k_std * sigma)
-    A[A < threshold] = 0
+    if apply_threshold:
+        tri_upper = A[np.triu_indices_from(A, k=1)]
+        mu = np.mean(tri_upper)
+        sigma = np.std(tri_upper)
+        threshold = max(0.0, mu - k_std * sigma)
+        A[A < threshold] = 0
     return nx.from_numpy_array(A)
 
 
@@ -251,10 +252,11 @@ def run_enhanced_benchmark(file_path, num_subjects=5, k_std=1.0):
 
             data_cube = f[ds_name][:]
             matrices = data_cube[:num_subjects]
+            apply_thresh = "glasso" not in ds_name.lower()
 
             for subj_idx, matrix in enumerate(matrices):
                 print(f"  Subject {subj_idx + 1}/{num_subjects}...")
-                G = build_graph(matrix, k_std)
+                G = build_graph(matrix, k_std, apply_threshold=apply_thresh)
 
                 if G.number_of_edges() == 0:
                     print(f"    [SKIP] No edges after thresholding.")
@@ -539,7 +541,8 @@ def generate_community_overlap_plots(file_path, num_subjects=5, k_std=1.0):
         for idx, (ds_name, ds_label) in enumerate(datasets_meta):
             ax = axes[idx // 2][idx % 2]
             matrix = f[ds_name][0]
-            G = build_graph(matrix, k_std)
+            apply_thresh = "glasso" not in ds_name.lower()
+            G = build_graph(matrix, k_std, apply_threshold=apply_thresh)
 
             if G.number_of_edges() == 0:
                 ax.set_title(f"{ds_label} — No edges", fontweight='bold')
