@@ -18,7 +18,13 @@ from scipy import stats
 from tqdm.notebook import tqdm
 from joblib import Parallel, delayed
 
-from Leiden import (
+import os
+import sys
+
+# Ensure imports work
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.Leiden import (
     leiden_algorithm,
     louvain_algorithm,
     modularity_vectorized,
@@ -88,7 +94,7 @@ def load_graphs(file_path, hc_key, scz_key, threshold=0.3):
 # In[ ]:
 
 
-file_path = "./SMA_data_processing/cobre_combined_connectomes_database.h5"
+file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SMA_data_processing", "cobre_combined_connectomes_database.h5"))
 
 print("BENCHMARK RESULTS")
 

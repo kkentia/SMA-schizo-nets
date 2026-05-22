@@ -9,9 +9,9 @@ import pandas as pd
 from sklearn.metrics import normalized_mutual_info_score
 from concurrent.futures import ProcessPoolExecutor
 
-# Ensure the current script directory is on sys.path for worker subprocesses importing
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from Leiden import leiden_algorithm, louvain_algorithm, modularity_vectorized
+# Ensure the parent directory is on sys.path for worker subprocesses importing
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from src.Leiden import leiden_algorithm, louvain_algorithm, modularity_vectorized
 
 def evaluate_single_run(matrix, algo_name, max_iter, k_std = 1.0):
     """
@@ -100,23 +100,14 @@ def run_benchmark_parallel(file_path, use_group_average=False, num_subjects=5, k
                     for matrix in matrices_to_test:
                         tasks.append((matrix, algo, iters, k_std))
 
-            """ for parralel processing, use that instead. 
-            print(f" -> Parallel computing on the cluster for {ds_name}...")
-            with ProcessPoolExecutor(max_workers=2) as executor:
+            num_workers = min(os.cpu_count() or 4, 6)  # use up to 6 cores, leave headroom
+            print(f" -> Parallel computing ({num_workers} workers) for {ds_name}...")
+            with ProcessPoolExecutor(max_workers=num_workers) as executor:
                 futures = [executor.submit(evaluate_single_run, *task) for task in tasks]
                 for fut in futures:
                     res = fut.result()
                     res["dataset"] = ds_name
                     all_results.append(res)
-                    
-            """
-
-            print(f" -> Sequential computing (Safe Mode) for {ds_name}...")
-            for task in tasks:
-                # task contient : (matrix, algo, iters, k_std)
-                res = evaluate_single_run(*task)
-                res["dataset"] = ds_name
-                all_results.append(res)
 
     df_res = pd.DataFrame(all_results)
     df_res.to_csv("benchmark_results_complete.csv", index=False)
@@ -220,7 +211,7 @@ def generate_plots(df):
     print("All plots generated and saved successfully.")
 
 if __name__ == "__main__":
-    file_path = "./SMA_data_processing/cobre_combined_connectomes_database.h5"
+    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SMA_data_processing", "cobre_combined_connectomes_database.h5"))
 
     datasets = ["hc_pearson", "scz_pearson", "hc_glasso", "scz_glasso"]
 
