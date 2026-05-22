@@ -76,7 +76,7 @@ source venv/bin/activate
 
 ```cmd
 python -m venv venv
-venv\Scripts\activate.ps1
+venv\Scripts\activate.bat
 ```
 
 </details>
