@@ -153,3 +153,5 @@ cobre_connectomes_database.h5
 
 # Miscellaneous
 __pycache__/
+.venv-wsl/
+.venv-wsl
